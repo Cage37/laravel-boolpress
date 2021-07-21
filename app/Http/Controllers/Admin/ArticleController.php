@@ -26,7 +26,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.articles.create');
     }
 
     /**
@@ -37,7 +37,16 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'author' => 'required',
+            'title' => 'required',
+            'subtitle' => 'nullable',
+            'image' => 'nullable',
+            'content' => 'required'
+        ]);
+
+        Article::create($validated);
+        return redirect()->route('admin.articles.index');   
     }
 
     /**
@@ -48,7 +57,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return view('admin.articles.show', compact('article'));
     }
 
     /**
@@ -59,7 +68,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return view('admin.articles.edit', compact('article'));
     }
 
     /**
@@ -71,7 +80,8 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $article->update($request->all());
+        return redirect()->route('admin.articles.show', $article->id); 
     }
 
     /**
@@ -82,6 +92,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return redirect()->route('admin.articles.index');
     }
 }

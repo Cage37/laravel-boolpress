@@ -23,7 +23,7 @@
             <td>{{ $article->subtitle }}</td>
             <td><img width="100" src="{{ $article->image }}" alt=""></td>
             <td>{{ $article->content }}</td>
-            <td>View | Edit | Delete</td>
+            <td><a href="{{ route('admin.articles.show', $article->id) }}">View</a> | <a href="{{ route('admin.articles.edit', $article->id) }}">Edit</a> | <a href="">Delete</a> </td>
         </tr>
         @endforeach
     </tbody>
