@@ -16,17 +16,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="d-flex justify-content-center align-items-center mt-3">
-            <form action="{{ route('admin.articles.edit', $article->id) }}">
-                <button type="submit" class="btn btn-warning mr-5">Edit</button>
-            </form>
-            <form action="{{ route('admin.articles.destroy', $article->id) }}" method="post">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger mr-5">Delete</button>
-            </form>
-        </div>
+        
 </div>
 
 @endsection

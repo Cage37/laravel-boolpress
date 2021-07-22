@@ -21,6 +21,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
     <!-- Styles -->
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
@@ -41,7 +42,7 @@
   </head>
   <body>
     
-<div class="container">
+<div class="container mt-3">
   <header class="blog-header py-3">
     <div class="row flex-nowrap justify-content-between align-items-center">
       <div class="col-4 pt-1">
@@ -61,42 +62,21 @@
 
   <div class="nav-scroller py-1 mb-2">
     <nav class="nav d-flex justify-content-between">
-      <a class="p-2 link-secondary" href="#">World</a>
-      <a class="p-2 link-secondary" href="#">U.S.</a>
-      <a class="p-2 link-secondary" href="#">Technology</a>
-      <a class="p-2 link-secondary" href="#">Design</a>
-      <a class="p-2 link-secondary" href="#">Culture</a>
-      <a class="p-2 link-secondary" href="#">Business</a>
-      <a class="p-2 link-secondary" href="#">Politics</a>
-      <a class="p-2 link-secondary" href="#">Opinion</a>
-      <a class="p-2 link-secondary" href="#">Science</a>
-      <a class="p-2 link-secondary" href="#">Health</a>
-      <a class="p-2 link-secondary" href="#">Style</a>
-      <a class="p-2 link-secondary" href="#">Travel</a>
     </nav>
   </div>
 </div>
 
-<main class="container">
+<main class="container mt-4">
   <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
-    <div class="col-md-6 px-0">
+    <div class="col-md-6 px-0 pt-5">
       <h1 class="display-4 fst-italic">HEY, LOOK AT ME!</h1>
-      <p class="lead my-3">Just kidding, I've absolutely nothing interesting to show. I was just looking for attention (I'm a leo)</p>
-      <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
+      <p class="lead my-3">Just kidding, I've absolutely nothing interesting to show. I was just looking for attention</p>
     </div>
   </div>
 
   @yield('content')
 
 </main>
-
-<footer class="blog-footer">
-  <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-  <p>
-    <a href="#">Back to top</a>
-  </p>
-</footer>
-
 
     
   </body>
