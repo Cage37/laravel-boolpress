@@ -15,7 +15,7 @@
     </div>
     @endif
 
-    <form action="{{ route('admin.articles.store') }}" method="post">
+    <form action="{{ route('admin.articles.store') }}" method="post" enctype="multipart/form-data">
         @csrf
 
         <div class="form-group">
@@ -42,9 +42,14 @@
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="image">IMAGE:</label>
             <input type="url" name="image" id="image" class="form-control @error('image') is-invalid @enderror" placeholder="Add a image" aria-describedby="imageHelper" value="{{old('image')}}">
+        </div> --}}
+
+        <div class="form-group">
+            <label for="image">IMAGE:</label>
+            <input type="file" name="image" id="image">
         </div>
         @error('image')
         <div class="alert alert-danger">{{ $message }}</div>

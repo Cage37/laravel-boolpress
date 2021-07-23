@@ -6,7 +6,6 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>ID</th>
             <th>Author</th>
             <th>Title</th>
             <th>Subtitle</th>
@@ -18,11 +17,10 @@
     <tbody>
         @foreach ($articles as $article)
         <tr>
-            <td>{{ $article->id }}</td>
             <td>{{ $article->author }}</td>
             <td>{{ $article->title }}</td>
             <td>{{ $article->subtitle }}</td>
-            <td><img width="100" src="{{ $article->image }}" alt=""></td>
+            <td><img width="100" src="{{ asset('storage/' . $article->image) }}" alt=""></td>
             <td>{{ $article->content }}</td>
             <td class="text-center">
                 <div class="mt-2"><a href="{{ route('admin.articles.show', $article->id) }}">View</a></div><br>

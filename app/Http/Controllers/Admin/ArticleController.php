@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Article;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -37,15 +38,18 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $validateData = $request->validate([
             'author' => 'required',
             'title' => 'required',
             'subtitle' => 'nullable',
-            'image' => 'nullable',
+            'image' => 'nullable | image | max: 150',
             'content' => 'required'
         ]);
 
-        Article::create($validated);
+        $file_path = Storage::put('post_images', $validateData['image']);
+        $validateData['image'] = $file_path;
+
+        Article::create($validateData);
         return redirect()->route('admin.articles.index');   
     }
 
@@ -80,8 +84,22 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        $article->update($request->all());
-        return redirect()->route('admin.articles.show', $article->id); 
+
+        $validateData = $request->validate([
+            'author' => 'required',
+            'title' => 'required',
+            'subtitle' => 'nullable',
+            'image' => 'nullable | image | max: 150',
+            'content' => 'required'
+        ]);
+
+        if(array_key_exists('image', $validateData)) {
+            $file_path = Storage::put('post_images', $validateData['image']);
+            $validateData['image'] = $file_path;
+        }
+
+        $article->update($validateData);
+        return redirect()->route('admin.articles.index', $article->id); 
     }
 
     /**

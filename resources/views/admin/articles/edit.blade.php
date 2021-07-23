@@ -4,7 +4,7 @@
 
 
 <div class="container pb-5">
-    <form action="{{ route('admin.articles.update', $article->id) }}" method="POST">
+    <form action="{{ route('admin.articles.update', $article->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -25,8 +25,9 @@
             <img src="{{ $article->image }}" alt="">
         </div>
         <div class="form-group">
-            <label for="image">EDIT IMAGE:</label>
-            <input type="url" name="image" id="image" class="form-control" placeholder="Edit image" aria-describedby="imageHelper" value="{{$article->image}}">
+            <label for="image">CHANGE IMAGE:</label>
+            <img src="{{ asset('storage/' . $article->image) }}" alt="">
+            <input type="file" name="image" id="image">
         </div>
         <div class="form-group">
             <label for="desc">EDIT CONTENT:</label>
