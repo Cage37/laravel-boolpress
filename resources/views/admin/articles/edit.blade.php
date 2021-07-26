@@ -4,6 +4,15 @@
 
 
 <div class="container pb-5">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <form action="{{ route('admin.articles.update', $article->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -35,7 +44,17 @@
                 {{$article->content}}
             </textarea>
         </div>
-       
+        <div class="form-group">
+            <label for="category_id">EDIT CATEGORIES:</label>
+            <select class="form-control" name="category_id" id="category_id">
+              <option selected disabled>Select a category</option>
+  
+              @foreach ($categories as $category)
+                  <option value="{{ $category->id }}" {{ $category->id == old('category_id', $article->category_id) ? 'selected' : '' }}>{{ $category->name }}</option>
+              @endforeach
+  
+            </select>
+          </div>
 
         <button type="submit" class="btn btn-primary">EDIT</button>
     </form>

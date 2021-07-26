@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Article;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -27,7 +28,8 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('admin.articles.create');
+        $categories = Category::all();
+        return view('admin.articles.create', compact('categories'));
     }
 
     /**
@@ -43,7 +45,8 @@ class ArticleController extends Controller
             'title' => 'required',
             'subtitle' => 'nullable',
             'image' => 'nullable | image | max: 150',
-            'content' => 'required'
+            'content' => 'required',
+            'category_id' => 'nullable | exists:categories,id'
         ]);
 
         $file_path = Storage::put('post_images', $validateData['image']);
@@ -72,7 +75,8 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('admin.articles.edit', compact('article'));
+        $categories = Category::all();
+        return view('admin.articles.edit', compact('article', 'categories'));
     }
 
     /**
@@ -90,7 +94,8 @@ class ArticleController extends Controller
             'title' => 'required',
             'subtitle' => 'nullable',
             'image' => 'nullable | image | max: 150',
-            'content' => 'required'
+            'content' => 'required',
+            'category_id' => 'nullable | exists:categories,id'
         ]);
 
         if(array_key_exists('image', $validateData)) {

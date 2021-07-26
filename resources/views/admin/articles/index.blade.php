@@ -11,6 +11,7 @@
             <th>Subtitle</th>
             <th>Image</th>
             <th>Content</th>
+            <th>Category</th>
             <th><a href="{{ route('admin.articles.create') }}"><i class="fas fa-plus createcircle"></i></a></th>
         </tr>
     </thead>
@@ -22,6 +23,7 @@
             <td>{{ $article->subtitle }}</td>
             <td><img width="100" src="{{ asset('storage/' . $article->image) }}" alt=""></td>
             <td>{{ $article->content }}</td>
+            <td>{{ $article->category ? $article->category->name : 'Uncategorized' }}</td>
             <td class="text-center">
                 <div class="mt-2"><a href="{{ route('admin.articles.show', $article->id) }}">View</a></div><br>
                 <div><a href="{{ route('admin.articles.edit', $article->id) }}">Edit</a></div>

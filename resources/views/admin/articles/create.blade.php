@@ -42,11 +42,6 @@
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-        {{-- <div class="form-group">
-            <label for="image">IMAGE:</label>
-            <input type="url" name="image" id="image" class="form-control @error('image') is-invalid @enderror" placeholder="Add a image" aria-describedby="imageHelper" value="{{old('image')}}">
-        </div> --}}
-
         <div class="form-group">
             <label for="image">IMAGE:</label>
             <input type="file" name="image" id="image">
@@ -63,6 +58,18 @@
         @error('content')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
+
+        <div class="form-group">
+          <label for="category_id">CATEGORIES</label>
+          <select class="form-control" name="category_id" id="category_id">
+            <option selected value="">Select a category</option>
+
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+            @endforeach
+
+          </select>
+        </div>
     
         <button type="submit" class="btn btn-primary mr-3">CREATE</button>
         <button class="btn btn-danger"><a class="text-white text-decoration-none" href="{{ route('admin.articles.index') }}">CANCEL</a></button>
