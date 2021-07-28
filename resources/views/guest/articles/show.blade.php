@@ -13,6 +13,14 @@
                         <h4 class="card-title">{{ $article->subtitle }}</h4>
                         <p class="card-text">{{ $article->content }}</p>
                         <p class="card-title">Category: {{ $article->category ? $article->category->name : 'Uncategorized' }}</p>
+                        <div class="tags">
+                            Tags:
+                            @forelse ($article->tags as $tag)
+                                <span>{{ $tag->name }}</span>
+                            @empty
+                                <span>No tags yet!</span>
+                            @endforelse
+                        </div>
                         <span>Written by: {{ $article->author }}</span>
                     </div>
                 </div>

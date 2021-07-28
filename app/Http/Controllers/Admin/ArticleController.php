@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\Tag;
 use App\Article;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -29,7 +30,8 @@ class ArticleController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.articles.create', compact('categories'));
+        $tags = Tag::all();
+        return view('admin.articles.create', compact('categories' , 'tags'));
     }
 
     /**
@@ -46,13 +48,15 @@ class ArticleController extends Controller
             'subtitle' => 'nullable',
             'image' => 'nullable | image | max: 150',
             'content' => 'required',
-            'category_id' => 'nullable | exists:categories,id'
+            'category_id' => 'nullable | exists:categories,id',
+            'tags' => 'nullable | exists:tags,id'
         ]);
 
         $file_path = Storage::put('post_images', $validateData['image']);
         $validateData['image'] = $file_path;
 
-        Article::create($validateData);
+        $article = Article::create($validateData);
+        $article->tags()->attach($request->tags);
         return redirect()->route('admin.articles.index');   
     }
 
@@ -76,7 +80,8 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         $categories = Category::all();
-        return view('admin.articles.edit', compact('article', 'categories'));
+        $tags = Tag::all();
+        return view('admin.articles.edit', compact('article', 'categories', 'tags'));
     }
 
     /**
@@ -95,7 +100,8 @@ class ArticleController extends Controller
             'subtitle' => 'nullable',
             'image' => 'nullable | image | max: 150',
             'content' => 'required',
-            'category_id' => 'nullable | exists:categories,id'
+            'category_id' => 'nullable | exists:categories,id',
+            'tags' => 'nullable | exists:tags,id',
         ]);
 
         if(array_key_exists('image', $validateData)) {
@@ -104,6 +110,9 @@ class ArticleController extends Controller
         }
 
         $article->update($validateData);
+        // $article->tags()->detach();
+        // $article->tags()->attach($request->tags);
+        $article->tags()->sync($request->tags);
         return redirect()->route('admin.articles.index', $article->id); 
     }
 
@@ -115,6 +124,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
+        $article->tags->detach();
         $article->delete();
         return redirect()->route('admin.articles.index');
     }

@@ -50,7 +50,6 @@
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-
         <div class="form-group">
             <label for="content">CONTENT:</label>
             <textarea name="content" id="content" class="form-control text-muted @error('content') is-invalid @enderror" rows="3" placeholder="Add a content">{{ old('content') }}</textarea>
@@ -63,13 +62,29 @@
           <label for="category_id">CATEGORIES</label>
           <select class="form-control" name="category_id" id="category_id">
             <option selected value="">Select a category</option>
-
             @foreach ($categories as $category)
                 <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
             @endforeach
+        </select>
+        </div>
+        @error('category_id')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
+        <div class="form-group">
+          <label for="tags">Tags</label>
+          <select multiple class="form-control" name="tags[]" id="tags">
+            <option value="" disabled>Select a tag</option>
+                @if($tags)
+                @foreach ($tags as $tag)
+                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                @endforeach
+                @endif
           </select>
         </div>
+        @error('tags')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
     
         <button type="submit" class="btn btn-primary mr-3">CREATE</button>
         <button class="btn btn-danger"><a class="text-white text-decoration-none" href="{{ route('admin.articles.index') }}">CANCEL</a></button>
