@@ -25,13 +25,18 @@
             <td>{{ $article->content }}</td>
             <td>{{ $article->category ? $article->category->name : 'Uncategorized' }}</td>
             <td class="text-center">
-                <div class="mt-2"><a href="{{ route('admin.articles.show', $article->id) }}">View</a></div><br>
-                <div><a href="{{ route('admin.articles.edit', $article->id) }}">Edit</a></div>
+                <a href="{{route('admin.articles.show', $article->id )}}" class="btn btn-primary mt-3 mb-3">
+                    <i class="fas fa-eye fa-sm fa-fw"></i>
+                </a>
+                <a href="{{route('admin.articles.edit', $article->id )}}" class="btn btn-secondary mb-3">
+                    <i class="fas fa-pencil-alt fa-sm fa-fw"></i>
+                </a>
                 <form action="{{ route('admin.articles.destroy', $article->id) }}" method="post">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger mt-3">Delete</button>
-            </form></td>
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash fa-sm fa-fw"></i></button>
+                </form>
+            </td>
         </tr>
         @endforeach
     </tbody>
