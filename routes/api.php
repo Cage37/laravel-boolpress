@@ -1,5 +1,7 @@
 <?php
 
+use App\Article;
+use App\Http\Resources\ArticleResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +18,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+// Route::get('articles', function() {
+//     $articles = Article::with(['category', 'tag'])->paginate();
+//     return $articles;
+// });
+
+Route::get('articles', 'API\ArticleController@index');
+
+// API risorsa singola
+
+Route::get('articles/{article}', function (Article $article) {
+    return new ArticleResource($article);
 });

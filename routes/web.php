@@ -21,6 +21,10 @@ Route::post('contacts', 'PageController@sendContactForm')->name('contacts.send')
 
 Route::resource('articles', ArticleController::class)->only('index', 'show');
 
+Route::get('vue-articles', function () {
+    return view('articles');
+});
+
 Auth::routes();
 
 

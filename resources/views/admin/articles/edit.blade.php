@@ -44,7 +44,7 @@
         </div>
         <div class="form-group">
             <label for="image">CHANGE IMAGE:</label>
-            <img src="{{ asset('storage/' . $article->image) }}" alt="">
+            <img width="100" src="{{ asset('storage/' . $article->image) }}" alt="">
             <input type="file" name="image" id="image">
         </div>
         @error('image')
