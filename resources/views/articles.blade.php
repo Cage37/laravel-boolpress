@@ -27,17 +27,7 @@
         <div class="jumbotron text-center">
             <h1 class="display-3">Vue-Articles</h1>
         </div>
-
-        <div class="container d-flex flex-wrap">
-            <div class="card text-left m-3" v-for="article in articles">
-              <img width="100" height="250" class="card-img-top" :src="'storage/' + article.image" alt="">
-              <div class="card-body">
-                <h4 class="card-title">@{{article.title}}</h4>
-              </div>
-            </div>
-
-        </div>
-
+        <articles-component></articles-component>
     </div>
 
 </body>

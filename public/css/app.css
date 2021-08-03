@@ -10942,3 +10942,19 @@ a.text-dark:focus {
   }
 }
 
+.contwelcome {
+  width: 100%;
+  height: 690px;
+  background-image: url(/images/pattern.jpeg?b33d27ed052e71ab5895e509d0b7189a);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: brightness(0.6);
+}
+
+.contwelcome h1 {
+  font-size: 5rem;
+  color: white;
+  word-spacing: 10px;
+}
+
