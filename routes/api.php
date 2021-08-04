@@ -1,6 +1,7 @@
 <?php
 
 use App\Article;
+use App\Category;
 use App\Http\Resources\ArticleResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,4 +32,10 @@ Route::get('articles', 'API\ArticleController@index');
 
 Route::get('articles/{article}', function (Article $article) {
     return new ArticleResource($article);
+});
+
+Route::middleware('api_token_check')->group(function () {
+    Route::get('categories', function () {
+        return Category::all();
+    });
 });
